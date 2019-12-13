@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Page</title>
+    <link rel="stylesheet" href="/css/manager_profile.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="/js/manager_profile.js"></script>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="menu_opa"></div>
+    <div id="menu_list">
+        <ul>
+                <li><span>Profile</span></li>
+                <li><span>Market</span></li>
+                <li><span>Products</span></li>
+                <li><span onclick="window.open('/chatting',name, 'resizable=no,width=500,height=700')">Chatting</span></li>
+            </ul>
+    </div>
+    <header>
+        <div class="fix">
+                <img src="/media/logo_white.png" class="logo"/>
+                <div class="session_info white">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="/media/menu.png" class="menu"/>
+            </div>
+            <div id="fix_hidden">
+                <img src="/media/logo_black.png" class="logo"/>
+                <div class="session_info black">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="/media/menu_black.png" class="menu"/>
+            </div>
+        <div class="berlin"><img src="/media/manager_profile_back.jpg" /></div>
+        <div class="name">
+            <p>P r o f i l e</p>
+            <p>Check your current informations and modify them</p>
+        </div>
+    </header>
+    <div style="clear:both; height:500px;"></div>
+	<input type="hidden" id="manager_db_info" value="<%=JSON.stringify(result)%>">
+	<input type="hidden" id="login_mode" value="<%=login_mode%>">
+    <section>
+        <img src="/media/menu_line.png"/><p>P r o f i l e</p>
+		<div id="form_div">
+			<img src="/media/logo_black.png" id="vibrate_image"/>
+			<form>
+				<div id="profile_db">
+					<ul>
+						<li><h3>Authority : </h3><input type="text" id="manager_mode" value="" readonly></li>
+						<li><h3>ID : </h3><input type="text" id="manager_id" value="" readonly></li>
+						<li><h3>Password : </h3><input type="text" id="manager_password" value="" readonly></li>
+						<li><h3>Name : </h3><input type="text" id="manager_name" value="" readonly></li>
+					</ul>
+				</div>
+				<div id="buttons">
+						<div class="modify_info info1">
+							<h3 id="modifyStr">정보 수정</h3>
+						</div>
+						<div class="modify_info info2">
+							<h3 id="modifyStr">확인</h3>
+						</div>
+						<div id="drop_info">
+							<h3>탈퇴하기</h3>
+						</div>
+					</div>
+			</form>
+		</div>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Login</title>
+     <link rel="stylesheet" href="/css/login.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="/js/login.js"></script>
+    <meta charset="UTF-8"/>
+ </head>
+ <body>
+    <img id="back" src="/media/num.jpg"/>
+     <div id="main_div">
+        <div>
+            <p id="p1">L O G I N<p>
+            <p id="p2">Log to your account<p>
+            <div>
+                <form id="loginForm" name="loginForm" action="/login/process" method="POST" onsubmit="return checkLogin()">
+                    <input type="text" name="username" id="username" placeholder="User name"/>
+                    <input type="password" name="userpw" id="userpw" placeholder="password"/>
+                    <input type="submit" name="lgbtn" id="lgbtn" value="Sign in"> <!--css button->#lgbtn으로 수정-->
+                </form>
+                <hr>
+                <a href='/join'>Not a member yet?</a> <!--href-->
+
+            </div>
+         </div>
+     </div>
+</body>
+</html>

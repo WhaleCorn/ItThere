@@ -1,0 +1,120 @@
+body {
+    overflow: hidden;
+    margin:0px;
+}
+
+#back {
+    position: absolute;
+    z-index:-5;
+    width:100%;
+    height:100%;
+}
+
+#main_div {
+    position: absolute;
+    top:20%;
+    left:25%;
+    width:50%;
+    height:60%;
+    border-radius: 20px;
+    background-color:rgba(255,255,255,0);
+    -webkit-animation: shadow 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#main_div>div {
+    padding:2%;
+    text-align: center;
+}
+
+#p1 {
+    text-align: center;
+    font:normal bold 40px sans-serif;
+}
+
+#p2, a:link, a:visited {
+    text-align: center;
+    font:normal normal 20px sans-serif;
+    color:black;
+    text-decoration: none;
+}
+
+input{
+    width:70%;
+    height:40px;
+    border:0px;
+    margin:5px;
+    padding-left:25px;
+    color:white;
+    background-color: rgba(0,0,0,0.7);
+}
+
+#lgbtn {
+    width:74%;
+    height:35px;
+    border:0px;
+    margin:2px 0px 1% 0px;
+    background-color:#ceb980;
+    color:black;
+	cursor:pointer;
+}
+
+#lgbtn:hover {
+	opacity:0.7;
+	box-shadow: 2px 2px 2px grey;
+}
+
+hr {
+    width:90%;
+    border: black 0px none;
+    border-top:black 1.5px solid;
+    height:1.5px;
+    margin: 30px 0px 10px 0px;
+}
+
+a:hover {
+	opacity:0.5;
+	text-shadow: 3px 3px 3px grey;
+}
+
+
+
+
+
+
+@-webkit-keyframes shadow {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    -webkit-background-color: rgba(255,255,255,0);
+            background-color: rgba(255,255,255,0);
+  }
+  100% {
+    -webkit-transform: translateZ(100px) translateY(10px);
+            transform: translateZ(100px) translateY(10px);
+    -webkit-box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+            box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+    -webkit-background-color: rgba(255,255,255,0.6);
+            background-color: rgba(255,255,255,0.6);
+  }
+}
+@keyframes shadow {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    -webkit-background-color: rgba(255,255,255,0);
+            background-color: rgba(255,255,255,0);
+  }
+  100% {
+    -webkit-transform: translateZ(100px) translateY(10px);
+            transform: translateZ(100px) translateY(10px);
+    -webkit-box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+            box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+    -webkit-background-color: rgba(255,255,255,0.6);
+            background-color: rgba(255,255,255,0.6);
+  }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/chatting.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="js/chatting.js" type="text/javascript"></script>
+</head>
+<body>
+    <img src="media/chatting_back.png"/>
+    <div id="container">
+        <div id="chatView">
+        </div>
+        <form id="chatForm" onsubmit="return false">
+            <input type="text" id="current_user" value="<%=username %>">
+            <input type="text" id="current_mode" value="<%=login_mode %>">
+			<input type="hidden" id="market_name" value="<%=market %>">
+            <input type="text" id="msg">
+            <input type="submit" id="send" value="전송">
+        </form>
+    </div>
+</body>
+</html>
