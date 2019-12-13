@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cart</title>
+        <link rel="stylesheet" href="css/cart.css">
+        <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="js/cart.js"></script>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div id="menu_opa"></div>
+        <div id="menu_list">
+            <ul>
+                <li><span >Search Products</span></li>
+                <li><span onclick="location.href='/User_market'">Markets</span></li>
+                <li><span>My Page</span></li>
+                <li><span onclick="location.href='/cart'">Cart</span></li>
+                <li><span>Guide</span></li>
+            </ul>
+        </div>
+        <header>
+            <div class="fix">
+                <img src="media/logo_white.png" class="logo"/>
+                <div class="session_info white">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="media/menu.png" class="menu"/>
+            </div>
+            <div id="fix_hidden">
+                <img src="media/logo_black.png" class="logo"/>
+                <div class="session_info black">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="media/menu_black.png" class="menu"/>
+            </div>
+            <div class="berlin"><img src="media/chatting_back.jpg"/></div>
+            <div class="name"><p>C a r t</p>
+                    <p>Put your favorite items in and buy them right away</p></div>
+        </header>
+        <div style="clear:both; height:500px;"></div>
+        <section>
+            <img src="media/menu_line.png"/><p>C a r t</p>
+            <div class="map">
+            </div>
+            <table id="productList_name">
+                <colgroup><col width="15%"/><col width="10%"/><col width="35%"/><col width="5%"/><col width="15%"/></colgroup>
+                <tr><th>번호</th><th>상품 이름</th><th>매장 이름</th><th>수량</th><th></th></tr>
+            </table>
+            <div id="firstdiv"><table id="first"></table></div>
+            <form name="frm" id='frm'>
+                <input type="hidden" id="g_name" name="g_name"/>
+                <input type="hidden" id="s_name" name="s_name"/>
+                <input type="hidden" id="number" name="number"/>
+            </form>
+            <form id="frm2" name="frm2">
+                <input type="hidden" id="cart" name="cart" value="<%= JSON.stringify(cart) %>">
+                <input type="hidden" id="cart2" name="cart2" value="<%= cart %>">
+                <div id="product_buy">
+                    <h3>구매하기</h3>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>

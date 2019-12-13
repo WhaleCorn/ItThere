@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Market</title>
+    <link rel="stylesheet" href="/css/user_market.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="/js/user_market.js"></script>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="menu_opa"></div>
+    <div id="menu_list">
+        <ul>
+            <li><span>Search Products</span></li>
+            <li><span onclick="location.href='/user/searchMarket'">Markets</span></li>
+            <li><span>My Page</span></li>
+            <li><span>Cart</span></li>
+            <li  onclick="location.href='/guide'"><span>Guide</span></li>
+        </ul>
+    </div>
+    <header>
+        <div class="fix">
+                <img src="/media/logo_white.png" class="logo"/>
+                <div class="session_info white">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="/media/menu.png" class="menu"/>
+            </div>
+            <div id="fix_hidden">
+                <img src="/media/logo_black.png" class="logo"/>
+                <div class="session_info black">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="/media/menu_black.png" class="menu"/>
+            </div>
+        <div class="berlin"><img src="/media/nam.jpg" /></div>
+        <div class="name">
+            <p>M a r k e t s</p>
+            <p>Check the information and ask in real time</p>
+        </div>
+    </header>
+    <div style="clear:both; height:500px;"></div>
+    <section>
+        <img src="/media/menu_line.png"/><p>M a r k e t s</p>
+        <fieldset>
+            <div>
+                <form action="/user/searchMarket" method="GET">
+                <input type="search" class="search_text" name="keyword" placeholder="Search.." />
+                <button type="submit" class="search_button">
+                    <img class="fa" src="/media/search_black.png" />
+                </button>
+            </form>
+            </div>
+        </fieldset>
+                <input type="hidden" name="resultData" id="resultData" value="<%=JSON.stringify(data)%>">
+        <input type="text" id="result_text" value="검색 결과가 없습니다." readonly>
+        <div id="marketInfo">
+            
+        </div>
+
+<!--
+        <div class="chat_start" onclick="window.open('/chatting',name, 'resizable=no,width=500,height=700')">
+            이 매장에 문의하기(채팅하기)
+        </div>
+-->
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+.pages {
+    list-style-type: none;
+}
+
+
+body {
+    margin-top:10%;
+    font-family: sans-serif;
+    background-color:rgba(0,0,0,0.1);
+}
+
+.select div{
+    width:95%;
+    height:80px;
+    text-align: center;
+}
+
+input[type=button] , input[type="submit"]{
+    cursor:pointer;
+}
+
+#gg_name {
+    text-align: center;
+    font-size:20px;
+    background-color: rgba(0,0,0,0.2);
+    border:0px;
+    padding:2%;
+}
+
+#ss_name {
+    border:none;
+    background-color:rgba(0,0,0,0.005);
+    width:200px;
+    text-align: center;
+    font-size:15px;
+}
+
+.plusminus {
+    position: relative;
+    margin: 0px auto;
+}
+
+.select div input {
+    margin:10px;
+}
+
+#number {
+    width:80px;
+    text-align: center;
+    font-size:20px;
+    
+}
+
+#plus, #minus, #plusplus, #minusminus {
+    background-color:#ceb980;
+    opacity:0.5;
+}
+
+#plus:hover, #minus:hover, #plusplus:hover, #minusminus:hover {
+    opacity:0.9;
+}
+
+#next, #cancel {
+    background-color:rgba(0,0,0,0.2);
+    padding:2% 5% 2% 5%;
+    border-radius: 5px;
+    opacity:0.5;
+}
+
+#next:hover, #cancel:hover {
+    opacity:0.9;
+    -webkit-animation: shake 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: shake 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+
+@-webkit-keyframes shake {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  80% {
+    -webkit-transform: translateX(3px);
+            transform: translateX(3px);
+  }
+  90% {
+    -webkit-transform: translateX(-3px);
+            transform: translateX(-3px);
+  }
+}
+@keyframes shake {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  80% {
+    -webkit-transform: translateX(3px);
+            transform: translateX(3px);
+  }
+  90% {
+    -webkit-transform: translateX(-3px);
+            transform: translateX(-3px);
+  }
+}

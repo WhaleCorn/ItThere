@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cart Buy Page</title>
+        <link rel="stylesheet" href="css/cart_buy.css">
+        <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="js/cart_buy.js"></script>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <section>
+            <form name="frm" id="frm">
+                <input type="hidden" id="cart" value="<%=JSON.stringify(cart)%>">
+                <table id="productList_name">
+                    <colgroup><col width="5%"/><col width="5%"/><col width="20%"/><col width="25%"/><col width="10%"/><col width="10%"/></colgroup>
+                    <tr><td><input type="checkbox" id="all"></td><th>번호</th><th>상품명</th><th>매장명</th><th>수량</th><th>가격</th></tr>
+                </table>
+                <table id="list_table"><colgroup><col width="5%"/><col width="5%"/><col width="20%"/><col width="25%"/><col width="10%"/><col width="10%"/></colgroup></table>
+                <div id="account_div">총 가격 : <input type="text" value="0" id="sum_account" readonly>원</div>
+                <div id="buttons">
+                    <input type="submit" id="buy" value="선택상품 구매">
+                    <input type="button" id="cancel" value="취소">
+                </div>
+            </form>
+        </section>
+    </body>
+</html>

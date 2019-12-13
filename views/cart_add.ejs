@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cart Add Page</title>
+        <link rel="stylesheet" href="css/cart_add.css">
+        <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="js/cart_add.js"></script>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <ul class="pages">
+            <li class="select page">
+                <div>
+                    <form action="/add_cookie" method="GET">
+                        <input type="text" name="ss_name" id="ss_name" value="<%= ss_name %>"><br>
+                        <input type="text" name="gg_name" id="gg_name" value="<%= gg_name %>" readonly>
+                        <input type="hidden" name="gg_stock_num" id="gg_stock_num" value="<%= gg_stock_num %>" readonly>
+                        <div class="plusminus">
+                            <input type="button" id="minusminus" value="--">
+                            <input type="button" id="minus" value="-">
+                            <input type="text" name="number" id="number" value="1" readonly>
+                            <input type="button" id="plus" value="+">
+                            <input type="button" id="plusplus" value="++">
+                        </div>
+                        <input type="submit" id="next" value="담기">
+                        <input type="button" id="cancel" value="취소">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </body>
+</html>

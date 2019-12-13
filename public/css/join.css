@@ -1,0 +1,164 @@
+body {
+    margin:0px;
+    overflow-x:hidden;
+}
+
+p, h1, h2, h4, h5, body {
+    font-family :sans-serif;
+}
+
+#back {
+    position: fixed;
+    z-index:-5;
+    width:100%;
+    height:100%;
+}
+
+#join_content{
+    position: relative;
+    left:12%;
+    width:70%; 
+    height:200px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    padding:20px;
+}
+
+.radio_name {
+    width:70%; 
+    float:left;
+}
+
+.radio_select {
+    width:60%; 
+    float:right;
+}
+
+#table1 {
+    text-align:center; 
+    border:1px solid black;
+}
+
+.table1_img {
+    width:30%; 
+    height:40px
+}
+
+#table2 {
+    width:80%; 
+    margin:0 auto;
+    text-align:left;
+}
+
+#table2 input[type=text], #table2 input[type=password] {
+    border: none; 
+    font-size: 15px;
+    background-color:rgba(10,10,10,0.4);
+    width:40%;
+    height:20px;
+    margin:2px;
+}
+
+
+.section1 {
+    width: 90%;
+    margin:0 auto;
+}
+
+.section2 {
+    margin:0 auto;
+    text-align:left;
+    width:70%;
+}
+
+.divbox{ 
+    padding-top:5%;
+    margin-top:8%;
+    background-color: white;
+    margin-left: 37.5%;
+    width: 69%;
+    position:absolute;
+    left: -22%;
+    text-align: center;
+    border-radius: 20px;
+    -webkit-animation: shadow 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#signid, #signpw{
+    box-shadow: 0 0 10px black;
+    border-radius: 5px;
+    width: 22%;
+    height: 50px;
+    margin: 1%;
+    display: inline-block;
+}
+
+#signid:hover, #signpw:hover{
+background-color: rgba(0,0,0,0.2);
+}
+
+.divbox span{
+    color:red;
+}
+
+.divbox th{
+    width:30%;
+    border-bottom:1.3px solid #dcdcdc;
+}
+
+.divbox em{
+    color:black;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.divbox td{
+    border-bottom:1.3px solid #dcdcdc;
+}
+
+#last {
+    width:100%;
+    height:100px;
+    position: relative;
+    top:2250px;
+}
+
+
+
+@-webkit-keyframes shadow {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    -webkit-background-color: rgba(255,255,255,0);
+            background-color: rgba(255,255,255,0);
+  }
+  100% {
+    -webkit-transform: translateZ(100px) translateY(10px);
+            transform: translateZ(100px) translateY(10px);
+    -webkit-box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+            box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+    -webkit-background-color: rgba(255,255,255,0.8);
+            background-color: rgba(255,255,255,0.8);
+  }
+}
+@keyframes shadow {
+  0% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    -webkit-background-color: rgba(255,255,255,0);
+            background-color: rgba(255,255,255,0);
+  }
+  100% {
+    -webkit-transform: translateZ(100px) translateY(10px);
+            transform: translateZ(100px) translateY(10px);
+    -webkit-box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+            box-shadow: 0 0 100px 0px rgba(0, 0, 0, 1);
+    -webkit-background-color: rgba(255,255,255,0.8);
+            background-color: rgba(255,255,255,0.8);
+  }
+}

@@ -1,0 +1,146 @@
+body {
+    background-color:rgba(0,0,0,0.05);
+    margin:0px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    font-family: sans-serif;
+}
+
+section{
+    width:90%;
+    height:500px;
+    margin:10% 5% 10% 5%;
+}
+
+#all {
+    width:15px;
+    height:15px;
+    cursor: pointer;
+}
+
+#productList_name {
+    background-color:rgba(229,217,215,0.9);
+    position: relative;
+    left:4%;
+    width:90%;
+}
+
+#list_table {
+    border-spacing: 30px;
+}
+
+#buttons {
+    text-align: center;
+}
+
+#buttons input {
+    margin:2%;
+    font-size:15px;
+    padding:1% 6% 2% 6%;
+    background-color:rgba(229,217,215,1);
+    border:0px;
+    opacity:0.6;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+    cursor:pointer;
+    border-radius: 5px;
+}
+
+#buttons input:hover {
+    opacity:1;
+    -webkit-animation: shake-lr 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	        animation: shake-lr 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+#account_div {
+    text-align: center;
+}
+
+#account_div input{
+    width:100px;
+    margin:1%;
+    height:20px;
+    border:0px;
+    padding-left:2%;
+    font-weight: bold;
+    font-size:15px;
+}
+
+.buy_check {
+    width:15px;
+    height:15px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+@-webkit-keyframes shake-lr {
+  0%,
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  10% {
+    -webkit-transform: rotate(4deg);
+            transform: rotate(4deg);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+  }
+  80% {
+    -webkit-transform: rotate(-4deg);
+            transform: rotate(-4deg);
+  }
+  90% {
+    -webkit-transform: rotate(4deg);
+            transform: rotate(4deg);
+  }
+}
+@keyframes shake-lr {
+  0%,
+  100% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  10% {
+    -webkit-transform: rotate(4deg);
+            transform: rotate(4deg);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+  }
+  80% {
+    -webkit-transform: rotate(-4deg);
+            transform: rotate(-4deg);
+  }
+  90% {
+    -webkit-transform: rotate(4deg);
+            transform: rotate(4deg);
+  }
+}

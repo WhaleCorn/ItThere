@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Products</title>
+        <link rel="stylesheet" href="/css/manager_market.css">
+        <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="/js/manager_market.js"></script>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div id="menu_opa"></div>
+        <div id="menu_list">
+            <ul>
+                <li><span>Profile</span></li>
+                <li><span>Market</span></li>
+                <li><span>Products</span></li>
+                <li><span onclick="window.open('/chatting',name, 'resizable=no,width=500,height=700')">Chatting</span></li>
+            </ul>
+        </div>
+        <header>
+            <div class="fix">
+                <img src="/media/logo_white.png" class="logo"/>
+                <div class="session_info white">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="/media/menu.png" class="menu"/>
+            </div>
+            <div id="fix_hidden">
+                <img src="/media/logo_black.png" class="logo"/>
+                <div class="session_info black">
+                    <%= username %>님 환영합니다.
+                    <a onclick="location.href='/logout'">로그아웃</a>
+                </div>
+                <img src="/media/menu_black.png" class="menu"/>
+            </div>
+            <div class="berlin"><img src="/media/market_back_image.jpg"/></div>
+            <div class="name"><p>M a r k e t</p>
+                    <p>Add your own markets and modify information to show customers</p></div>
+        </header>
+        <div style="clear:both; height:500px;"></div>
+        <section>
+            <img src="/media/menu_line.png"/><p>M a r k e t</p>
+            <div id="market_list">
+               <img src="/media/arrow_left.png" class="arrow left"/>
+               <div class="market_list_in">
+                   <input type="text" id="s_idx" value="<%=market%>" readonly>
+                   <input type="text" id="s_name" value="<%=market_name%>" readonly>
+               </div>
+               <img src="/media/arrow_right.png" class="arrow right"/>
+           </div>
+           <div id="market_info">
+               <table class="list_table">
+                   <colgroup>
+                       <col width="10%"/>
+                       <col width="40%"/>
+                       <col width="20%"/>
+                       <col width="20%"/>
+                       <col width="10%"/>
+                   </colgroup>
+
+               </table>
+               <table class="list_table2">
+                   <colgroup>
+                       <col width="10%"/>
+                       <col width="40%"/>
+                       <col width="20%"/>
+                       <col width="20%"/>
+                       <col width="10%"/>
+                   </colgroup>
+               </table>
+          </div>
+
+           <div id="buttonArea">
+            <div id="market_modify">
+                <h3>상점 수정</h3>
+            </div>
+            <div id="market_add" onclick="location.href='/manager/market/insert'">
+                <h3>상점 추가</h3>
+            </div>
+        </section>
+   </body>
+</html>

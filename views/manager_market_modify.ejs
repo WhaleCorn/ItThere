@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Markets</title>
+    <link rel="stylesheet" href="/css/manager_market_modify.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="/js/manager_market_modify.js"></script>
+    <script src="/js/address.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71d672952dbd86fe81d23be242bfe156&libraries=services"></script>
+
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="menu_opa"></div>
+    <div id="menu_list">
+        <ul>
+            <li><span>Profile</span></li>
+            <li><span>Market</span></li>
+            <li><span>Products</span></li>
+            <li><span onclick="window.open('/chatting',name, 'resizable=no,width=500,height=700')">Chatting</span></li>
+        </ul>
+    </div>
+    <header>
+        <div class="fix">
+            <img src="/media/logo_white.png" class="logo" />
+            <div class="session_info white">
+                <%= username %>님 환영합니다.
+                <a onclick="location.href='/logout'">로그아웃</a>
+            </div>
+            <img src="/media/menu.png" class="menu" />
+        </div>
+        <div id="fix_hidden">
+            <img src="/media/logo_black.png" class="logo" />
+            <div class="session_info black">
+                <%= username %>님 환영합니다.
+                <a onclick="location.href='/logout'">로그아웃</a>
+            </div>
+            <img src="/media/menu_black.png" class="menu" />
+        </div>
+        <div class="berlin"><img src="/media/market_back_image.jpg" /></div>
+        <div class="name">
+            <p>M a r k e t</p>
+            <p>Add your own markets and modify information to show customers</p>
+        </div>
+    </header>
+    <div style="clear:both; height:500px;"></div>
+    <section>
+        <img src="/media/menu_line.png" />
+        <p>M a r k e t</p>
+
+        <div id="market_modify_title">
+            <input type="text" id="userId" value="<%=storeName%>">
+        </div>
+        <div id="market_modify_board">
+            <form action="/manager/modifyMarket" method="POST" id="modifyMarketForm" onsubmit="return checkMarketForm();"
+                enctype="multipart/form-data">
+                <table class="modify_table">
+                    <colgroup>
+                        <col width="10%" />
+                        <col width="40%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="10%" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>상점 명</th>
+                            <td><input type="text" name="storeName" id="storeName" value="<%=storeName%>"></td>
+                        </tr>
+                        <tr>
+                            <th>상점 위치</th>
+                            <td><input type="text" id="postcode" onclick="execDaumPostcode()" placeholder="우편번호"
+                                    readonly>
+                                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                                <input type="text" id="address" onclick="execDaumPostcode()" placeholder="주소"
+                                    readonly><br>
+                                <input type="text" id="detailAddress" name="storeDetailAddress" placeholder="상세주소"
+                                    value="<%=storeDetailAddress%>">
+                                <input type="text" id="extraAddress" placeholder="참고항목">
+                                <input type="hidden" id="storeAddress" name="storeAddress" value="<%=storeAddress%>"
+                                    required>
+                                <input type="hidden" id="storeLocationLong" name="storeLocationLong"
+                                    value="<%=storeLocationLong%>" required>
+                                <input type="hidden" id="storeLocationLat" name="storeLocationLat"
+                                    value="<%=storeLocationLat%>" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>상점 전화번호</th>
+                            <td><input type="tel" name="storeTell" id="storeTell" value="<%=storeTell%>" /></td>
+                        </tr>
+                        <tr>
+                            <th>매장 사진</th>
+                            <td><input type="file" name="storeImage" id="storeImage" <%=storeImage%>></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="buttonArea">
+            <div class="button" onclick="history.back()">
+                <h3>뒤로 가기</h3>
+            </div>
+            <div class="button" id="modifyButton">
+                <h3>매장 수정</h3>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
