@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>Cart</title>
-        <link rel="stylesheet" href="css/cart.css">
+        <link rel="stylesheet" href="/css/cart.css">
         <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
-        <script src="js/cart.js"></script>
+        <script src="/js/cart.js"></script>
         <meta charset="UTF-8" />
     </head>
     <body>
@@ -20,28 +20,28 @@
         </div>
         <header>
             <div class="fix">
-                <img src="media/logo_white.png" class="logo"/>
+                <img src="/media/logo_white.png" class="logo"/>
                 <div class="session_info white">
                     <%= username %>님 환영합니다.
                     <a onclick="location.href='/logout'">로그아웃</a>
                 </div>
-                <img src="media/menu.png" class="menu"/>
+                <img src="/media/menu.png" class="menu"/>
             </div>
             <div id="fix_hidden">
-                <img src="media/logo_black.png" class="logo"/>
+                <img src="/media/logo_black.png" class="logo"/>
                 <div class="session_info black">
                     <%= username %>님 환영합니다.
                     <a onclick="location.href='/logout'">로그아웃</a>
                 </div>
-                <img src="media/menu_black.png" class="menu"/>
+                <img src="/media/menu_black.png" class="menu"/>
             </div>
-            <div class="berlin"><img src="media/chatting_back.jpg"/></div>
+            <div class="berlin"><img src="/media/chatting_back.jpg"/></div>
             <div class="name"><p>C a r t</p>
                     <p>Put your favorite items in and buy them right away</p></div>
         </header>
         <div style="clear:both; height:500px;"></div>
         <section>
-            <img src="media/menu_line.png"/><p>C a r t</p>
+            <img src="/media/menu_line.png"/><p>C a r t</p>
             <div class="map">
             </div>
             <table id="productList_name">
@@ -61,6 +61,7 @@
                     <h3>구매하기</h3>
                 </div>
             </form>
+         <input type="hidden" value="" id="child_value">
         </section>
     </body>
 </html>

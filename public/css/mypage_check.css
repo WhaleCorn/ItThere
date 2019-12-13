@@ -1,0 +1,231 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header div {
+    width:100%;
+    background-color: #000000;
+    height:100px;
+    position:fixed;
+    z-index: 1;
+    background-color:rgba(255,255,255,0);
+}
+
+.name {
+    text-align: center;
+    margin-top:240px;
+    color:#ffffff;
+    font: normal normal 25px sans-serif;
+}
+
+.name {
+  position: absolute;
+  top:-10%;
+	-webkit-animation: focus-in-expand 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: focus-in-expand 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.name p:first-child {
+    font-weight: bold;
+    font-size:40px;
+}
+
+.fix {
+    position:fixed;
+    z-index:5;
+    -webkit-animation: slide-top 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	  animation: slide-top 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.logo {
+    width:auto;
+    height:70%;
+    float:left;
+    margin: 5px 0px 0px 10px;
+    opacity:0.8;
+}
+
+.menu {
+    width:auto;
+    height:70%;
+    float:right;
+    margin:15px 30px 15px 15px;
+    opacity:0.8;
+}
+
+.berlin {
+    position: absolute;
+    height:500px;
+    overflow:hidden;
+}
+
+.berlin img {
+  width:100%;
+  -webkit-animation: kenburns-top 2s ease-out both;
+	animation: kenburns-top 2s ease-out both;
+}
+
+body {
+    margin:0px;
+    overflow-x: hidden;
+    width:100%;
+    height:auto;
+}
+
+section {
+    margin-top:90px;
+    position: absolute;
+    left:10%;
+    width:80%;
+    height:800px;
+}
+
+section>img {
+    margin-left:100px;
+    margin-right:20px;
+    width:45px;
+    height:auto;
+    
+}
+section>p {
+    display:inline;
+    font: normal normal 25px sans-serif;
+    color:black;
+}
+
+.wrapper {
+  background: rgba(56, 45, 15, 0.5);
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 70%;
+  margin-top: 5%;
+  border-radius: 30px;
+}
+
+.contents {
+  background: rgba(255,255,255,0.5);
+  border-radius: 30px;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  width: 80%;
+  height: 84%;
+  font: normal italic 20px sans-serif;
+}
+
+.contents p {
+    font: normal bold 30px sans-serif;
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    text-align: center;
+}
+
+.contents input {
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 25%;
+    height: 30px;
+    border: solid 0.5px;
+}
+
+.enter {
+    position: absolute;
+    top: 40%;
+    left: 60%;
+    width: 5%;
+    height: 31px;
+    border: solid 0.5px;
+    font-style: normal;
+}
+
+@-webkit-keyframes kenburns-top {
+  100% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+            transform-origin: 50% 16%;
+  }
+  0% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+            transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+  }
+}
+@keyframes kenburns-top {
+  100% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+            transform-origin: 50% 16%;
+  }
+  0% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+            transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+  }
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    -webkit-opacity:0;
+            opacity:0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-opacity:1;
+            opacity:1;
+      
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    -webkit-opacity:0;
+            opacity:0;
+  }
+  100% {
+    -webkit-transform: translateY();
+            transform: translateY();
+    -webkit-opacity:1;
+            opacity:1;
+  }
+}
+
+@-webkit-keyframes focus-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes focus-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}

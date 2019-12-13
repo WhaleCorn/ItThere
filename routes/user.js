@@ -29,14 +29,14 @@ router.get('/searchMarket', function (request, response) {
                         keyword:keyword
                     });
                 } else {
-                    response.redirect('/User_market');
+                    response.redirect('/user/searchMarket');
                 }
             });
         }else{
             response.render('User_market', {
                 data: null,
                 username:request.session.username,
-                keyword:null
+                keyword: null
             })
         }
     } else {

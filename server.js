@@ -10,6 +10,10 @@ var app = express();  //웹 서버 생성
 var server = http.Server(app);
 var io = socket(server);
 
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -45,11 +49,16 @@ app.get('/logout', function (request, response) {
     response.send('<script type="text/javascript">alert("로그아웃 되었습니다."); window.location="/"; </script>');
 });
 
-
+app.get('/testMypage', function (request, response) {
+    response.render('mypage');
+});
+app.get('/mypageCheck', function (request, response) {
+    response.render('mypage_check');
+});
 app.get('/My_page', function (request, response) {
 
     connection.query('SELECT * from customers where c_id=?', [request.session.username], function (error, result) {
-        if (error) { console.log(error); }
+        if (error) { throw error; }
         else {
             response.render('My_page', { username: request.session.username, result: result, login_mode: request.session.login_mode });
         }
@@ -218,7 +227,6 @@ io.on('connection', function (socket) {
 
     socket.on('SEND', function (data) {
         if (data.login_mode == "1") {
-            console.log(data.target);
             io.to(idList[data.target]).emit('SEND', { msg: data.msg, username: data.username });
         }
         else if (data.login_mode == "2") {
@@ -258,6 +266,7 @@ io.on('connection', function (socket) {
             io.to(idList[data.username]).emit('enter', { msg: str });
         }
         else if (data.login_mode == "1") {
+            console.log(data.market);
             var str = '안녕하세요 ' + data.market + '입니다:) 문의 주시면 답변 드리겠습니다.';
             io.to(idList[socket.username]).emit('user_enter', { msg: str, market: data.market });
         }
@@ -267,9 +276,22 @@ io.on('connection', function (socket) {
 app.get('/guide', function (request, response) {
     response.render('guide');
 })
-app.get('/barcode', function(request, response){
+app.get('/barcode', function (request, response) {
     response.render('barcodeTest');
-})
+});
+
+app.use(function (req, res, next) {
+    next(createError(404));
+});
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
 server.listen(5000, function () {
     console.log('Server On !');
 });
