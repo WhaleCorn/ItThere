@@ -1,92 +1,103 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>ItThere</title>
-        <link rel="stylesheet" href="/css/ItThere_main.css">
-        <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
-        <script src="/js/ItThere_main.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <video src="/media/main_background_video.mp4" class="scroll1" autoplay loop>
-            지원 안해조!?!?!?!?
-        </video>
-        <div class="scroll"> 
-            <ul>
-                <li><a href="#section0"><img class="scroll_img scroll0" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
-                <li><a href="#section1"><img class="scroll_img scroll1" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
-                <li><a href="#section2"><img class="scroll_img scroll2" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
-                <li><a href="#section3"><img class="scroll_img scroll3" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
-            </ul>
-        </div>
-        <div class="section section0" id="section0">
-            <div class="center">
-                <div>
-                    <img class="img" src="/media/logo_white.png"/>
-                </div>
-                <div id="main_search">
-                    <form action="/user/searchProduct" method="GET"> <!--GET으로 수정-->
-                        <fieldset>
-                        <input type="text" name="keyword"/>
+
+<head>
+    <title>ItThere</title>
+    <link rel="stylesheet" href="/css/ItThere_main.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="/js/ItThere_main.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <video src="/media/main_background_video.mp4" class="scroll1" autoplay loop>
+        지원 안해조!?!?!?!?
+    </video>
+    <div class="scroll">
+        <ul>
+            <li><a href="#section0"><img class="scroll_img scroll0" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
+            <li><a href="#section1"><img class="scroll_img scroll1" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
+            <li><a href="#section2"><img class="scroll_img scroll2" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
+            <li><a href="#section3"><img class="scroll_img scroll3" src="/media/scroll_dot.png" alt="이미지 없음"></a></li>
+        </ul>
+    </div>
+    <div class="section section0" id="section0">
+        <div class="center">
+            <div>
+                <img class="img" src="/media/logo_white.png" />
+            </div>
+            <div id="main_search">
+                <fieldset>
+                    <form action="/user/searchProduct" id="searchProductForm" method="GET">
+                        <!--GET으로 수정-->
+                        <input type="search" name="keyword" id="keyword" />
                         <button type="submit">
-                            <img class="fa" src="/media/main_search.png"/>
+                            <img class="fa" src="/media/main_search.png" />
                         </button>
-                        </fieldset>
                     </form>
-                </div>
+
+                </fieldset>
             </div>
         </div>
-        <div class="middle">
-            <div class="mouse"></div>
-        </div>
-        <div class="section section1" id="section1">
-            <img src="/media/block.jpg" class="block"/>
-            <div class="user">
-                <div class="login">
-                    <p class="select">U S E R</p>
-                    <div class="pop user_pop">
-                        <p class="select_p">Record your search history and make it easy to buy</p>
-                        <div class="select_div" onclick="location.href='/login/user'"><p>Login</p></div>
-                    </div>
-                </div>
-            </div>
-            <div class="manager">
-                <div class="login">
-                    <p class="select">M A N A G E R</p>
-                    <div class="pop manager_pop">
-                        <p class="select_p">Register for your store and manage merchandise comfortably</p>
-                        <div class="select_div" onclick="location.href='/login/manager'"><p>Login</p></div>
+    </div>
+    <div class="middle">
+        <div class="mouse"></div>
+    </div>
+    <div class="section section1" id="section1">
+        <img src="/media/block.jpg" class="block" />
+        <div class="user">
+            <div class="login">
+                <p class="select">U S E R</p>
+                <div class="pop user_pop">
+                    <p class="select_p">Record your search history and make it easy to buy</p>
+                    <div class="select_div" onclick="location.href='/login/user'">
+                        <p>Login</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="section section2" id="section2">
-            <img src="/media/mapmap.jpg" id="section2_back"/>
-         <div>
+        <div class="manager">
+            <div class="login">
+                <p class="select">M A N A G E R</p>
+                <div class="pop manager_pop">
+                    <p class="select_p">Register for your store and manage merchandise comfortably</p>
+                    <div class="select_div" onclick="location.href='/login/manager'">
+                        <p>Login</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section2" id="section2">
+        <img src="/media/mapmap.jpg" id="section2_back" />
+        <div>
             <div class="come1"></div>
             <div class="come2"></div>
             <div class="come3"></div>
             <div class="come4"></div>
             <div class="come5"></div>
             <div class="come6"></div>
-            <img src="/media/contact_to.png" id="contact_to"/>
+            <img src="/media/contact_to.png" id="contact_to" />
             <h4 id="contact_to_below">ItThere에서 새로운 세상을 만나보세요.</h4>
             <div id="below_line"></div>
-            <img id="right_info" src="/media/box_line.png"/>
+            <img id="right_info" src="/media/box_line.png" />
             <h3 id="right_manager">CUSTOMER는 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;번거로움을 줄이고</h3>
             <h3 id="right_user">MANAGER는 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;쉽게 홍보할 수 있는</h3>
-         </div>
         </div>
-        <div class="section section3" id="section3">
-            <video src="/media/wow.mp4" autoplay loop width="100%">
-                지원 안해조!?!?!?!?
-            </video>
-            <div class="up"></div>
-            <div class="onvideo">
-                <p class="select">I t  T h e r e</p>
-                <p class="select_p">오프라인 쇼핑이 보다 편리해지고 세상 매장들을 통합하는 시대를 엽니다</p>
-                <div class="onvideo_div"><p>Guide</p></div>
+    </div>
+    <div class="section section3" id="section3">
+        <video src="/media/wow.mp4" autoplay loop width="100%">
+            지원 안해조!?!?!?!?
+        </video>
+        <div class="up"></div>
+        <div class="onvideo">
+            <p class="select">I t T h e r e</p>
+            <p class="select_p">오프라인 쇼핑이 보다 편리해지고 세상 매장들을 통합하는 시대를 엽니다</p>
+            <div class="onvideo_div">
+                <p>Guide</p>
             </div>
-            <div class="down"></div>
         </div>
-    </body>
+        <div class="down"></div>
+    </div>
+</body>
+
 </html>

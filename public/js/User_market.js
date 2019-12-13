@@ -131,5 +131,11 @@ window.onload=function() {
 	});
 	
     
-    
+    $('#searchMarketForm').submit(function(){
+        if(!$('#keyword').val()){
+            alert('검색어를 입력해 주세요.');
+            return false;
+        }
+        return true;
+    });
 };

@@ -1,82 +1,103 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>User search page</title>
-        <link rel="stylesheet" href="/css/User_search5.css">
-        <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
-        <script type="text/javascript"
+
+<head>
+    <title>User search page</title>
+    <link rel="stylesheet" href="/css/User_search5.css">
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=71d672952dbd86fe81d23be242bfe156&libraries=services"></script>
-        <script src="/js/User_search5.js"></script>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <div id="menu_opa"></div>
-        <div id="menu_list">
-            <ul>
-                <li><span>Search Products</span></li>
-                <li><span onclick="location.href='/user/searchMarket'">Markets</span></li><!--이거 왜 안됨?-->
-                <li><span onclick="location.href='/My_page'">My Page</span></li>
-                <li><span onclick="location.href='/Cart'">Cart</span></li>
-                <li><span>Guide</span></li>
-            </ul>
+    <script src="/js/User_search5.js"></script>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div id="menu_opa"></div>
+    <div id="menu_list">
+        <ul>
+            <li><span>Search Products</span></li>
+            <li><span onclick="location.href='/user/searchMarket'">Markets</span></li>
+            <!--이거 왜 안됨?-->
+            <li><span onclick="location.href='/My_page'">My Page</span></li>
+            <li><span onclick="location.href='/Cart'">Cart</span></li>
+            <li><span>Guide</span></li>
+        </ul>
+    </div>
+    <header>
+        <div class="fix">
+            <img src="/media/logo_white.png" class="logo" />
+            <div class="session_info white">
+                <%= username %>님 환영합니다.
+                <a onclick="location.href='/logout'">로그아웃</a>
+            </div>
+            <img src="/media/menu.png" class="menu" />
         </div>
-        <header>
-            <div class="fix">
-                <img src="/media/logo_white.png" class="logo"/>
-                <div class="session_info white">
-                    <%= username %>님 환영합니다.
-                    <a onclick="location.href='/logout'">로그아웃</a>
-                </div>
-                <img src="/media/menu.png" class="menu"/>
+        <div id="fix_hidden">
+            <img src="/media/logo_black.png" class="logo" />
+            <div class="session_info black">
+                <%= username %>님 환영합니다.
+                <a onclick="location.href='/logout'">로그아웃</a>
             </div>
-            <div id="fix_hidden">
-                <img src="/media/logo_black.png" class="logo"/>
-                <div class="session_info black">
-                    <%= username %>님 환영합니다.
-                    <a onclick="location.href='/logout'">로그아웃</a>
-                </div>
-                <img src="/media/menu_black.png" class="menu"/>
-            </div>
-            <div class="berlin"><img src="/media/login_back.jpg"/></div>
-            <div class="name"><p>S e a r c h</p>
-                    <p>Find the Product you want quickly</p></div>
-        </header>
-            <div style="clear:both; height:500px;"></div>
-        <section>
-            <img src="/media/menu_line.png"/><p>S e a r c h</p>
-            <div class="map">
-            </div>
-            <form>
-                <fieldset>
-                    <div>
-                        <form action="/user/searchProduct" method="GET">
-                    <input type="search" name="keyword" class="search_text" placeholder="<%= keyword %>"/>
+            <img src="/media/menu_black.png" class="menu" />
+        </div>
+        <div class="berlin"><img src="/media/login_back.jpg" /></div>
+        <div class="name">
+            <p>S e a r c h</p>
+            <p>Find the Product you want quickly</p>
+        </div>
+    </header>
+    <div style="clear:both; height:500px;"></div>
+    <section>
+        <img src="/media/menu_line.png" />
+        <p>S e a r c h</p>
+        <div class="map">
+        </div>
+        <fieldset>
+                <div>
+                    <form action="/user/searchProduct" id="searchProductForm" method="GET">
+                        <input type="search" name="keyword" id="keyword" class="search_text"
+                            placeholder="<%= keyword %>" />
                         <button type="submit" class="search_button">
-                            <img class="fa" src="/media/search_black.png"/>
-                    </button>
-                </form>
-                    </div>
-                </fieldset>
-                <div id="keyword_text">가장 가까운 "<%= keyword %>" 검색 결과...</div>
-            </form>
-            <input type="hidden" name="resultData" id="resultData" value="<%=JSON.stringify(data)%>">
-            <div id="table_name">
-                <table id="productList_name">
-                    <colgroup><col width="15%"/><col width="10%"/><col width="35%"/><col width="15%"/><col width="10%"/><col width="10%"/></colgroup>
-                    <tr><th>번호</th><th>상품 이름</th><th>매장 이름</th><th>가격</th><th>재고</th><th>거리</th></tr>
-                </table>
-            </div>
-            <div id="table_scroll">
-                <table id="productList"></table>
-            </div>
-            <form name="frm" id='frm'>
-                <input type="hidden" id="ss_name" name="ss_name"/>
-                <input type="hidden" id="gg_name" name="gg_name"/>
-                <input type="hidden" id="gg_stock_num" name="gg_stock_num"/>
-            </form>
-        </section>
-        <footer>
-        	
-        </footer>
-    </body>
+                            <img class="fa" src="/media/search_black.png" />
+                        </button>
+                    </form>
+                </div>
+        </fieldset>
+        <div id="keyword_text">가장 가까운 "<%= keyword %>" 검색 결과...</div>
+        </form>
+        <input type="hidden" name="resultData" id="resultData" value="<%=JSON.stringify(data)%>">
+        <div id="table_name">
+            <table id="productList_name">
+                <colgroup>
+                    <col width="15%" />
+                    <col width="10%" />
+                    <col width="35%" />
+                    <col width="15%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                </colgroup>
+                <tr>
+                    <th>번호</th>
+                    <th>상품 이름</th>
+                    <th>매장 이름</th>
+                    <th>가격</th>
+                    <th>재고</th>
+                    <th>거리</th>
+                </tr>
+            </table>
+        </div>
+        <div id="table_scroll">
+            <table id="productList"></table>
+        </div>
+        <form name="frm" id='frm'>
+            <input type="hidden" id="ss_name" name="ss_name" />
+            <input type="hidden" id="gg_name" name="gg_name" />
+            <input type="hidden" id="gg_stock_num" name="gg_stock_num" />
+        </form>
+    </section>
+    <footer>
+
+    </footer>
+</body>
+
 </html>
