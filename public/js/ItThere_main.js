@@ -1,4 +1,6 @@
-window.onload=function() {
+$(document).ready(function(){
+
+
     
     setTimeout(function() {
         var mouse = document.getElementsByClassName('middle');
@@ -240,4 +242,11 @@ window.onload=function() {
             }, 500);
             return false;
         });
-};
+        $('#searchProductForm').submit(function(){
+            if(!$('#keyword').val()){
+                alert('검색어를 입력해 주세요.');
+                return false;
+            }
+            return true;
+        });
+    });

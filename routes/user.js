@@ -57,13 +57,19 @@ router.get('/searchProduct', function (request, response) {
                         username:request.session.username
                     })
                 } else {
-                    response.redirect('/');
+                    response.render('User_search5', {
+                        data: results,
+                        keyword: keyword,
+                        username:request.session.username
+                    })
+
                 }
-                response.end();
             });
         } else {
             response.render('User_search5', {
-                data: null
+                data: null,
+                keyword:null,
+                username: request.session.username
             });
         }
     }
