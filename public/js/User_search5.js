@@ -112,8 +112,7 @@ $(document).ready(function(){
 
         var imageSrc = '/media/like.png',
             imageSize = new kakao.maps.Size(30, 30);
-            imageOption = {offset: new kakao.maps.Point(27, 69)};
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
         var marker = new kakao.maps.Marker({  
             map: map, 
             position: locPosition,

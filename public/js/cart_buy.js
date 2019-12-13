@@ -59,11 +59,14 @@ $(document).ready(function(){
     });
     
     var check = document.getElementsByClassName('buy_check');
+   var buy_List = new Array();
     
     $('#buy').click(function() {
         for(var i=0;i<list_table.rows.length;i++){
             var now_check = (check).item(i);
             if( $(now_check).is(":checked")==true ){
+            var now_index = list_table.rows[i].cells[1];
+            var this_index = $(now_index).text();
                 var now_g_name = list_table.rows[i].cells[2];
                 var g_name = $(now_g_name).text();
                 var now_s_name = list_table.rows[i].cells[3];
@@ -71,12 +74,14 @@ $(document).ready(function(){
                 var now_number = list_table.rows[i].cells[4];
                 var number = $(now_number).text();
                 changeStock(g_name, s_name, number);
+            buy_List.push(this_index);
             }
         }
         var total = $('#sum_account').val();
         alert(total+'원 결제가 완료되었습니다.');
-        opener.document.location.href='/Cart';
-        self.close();
+//        opener.document.location.href='/Cart';
+      opener.document.getElementById('child_value').value = buy_List;
+        window.close();
     });
     
     var account = document.getElementsByClassName('account');

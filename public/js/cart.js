@@ -1,4 +1,5 @@
 window.onload=function() {
+   
 
     menu_list = document.getElementById('menu_list');
     menu_opa = document.getElementById('menu_opa');
@@ -41,14 +42,14 @@ window.onload=function() {
             $('.session_info').css({ visibility: 'hidden' });
             $(menu_list).animate({ right: '+=35%' }, 500);
             if($(window).scrollTop()>=berlin_offset-10) {
-                $(menu2).attr('src', '/media/menu_white_after.png');
+                $(menu2).attr('src', 'media/menu_white_after.png');
                 menu2.classList.remove('rotate-center');
                 menu2.offsetWidth = menu2.offsetWidth;
                 menu2.classList.add('rotate-center');
                 setTimeout(function() { menu2.classList.remove('rotate-center'); },1700);
             }
             else {
-                $(menu).attr('src', '/media/menu_white_after.png');
+                $(menu).attr('src', 'media/menu_white_after.png');
                 menu.classList.remove('rotate-center');
                 menu.offsetWidth = menu.offsetWidth;
                 menu.classList.add('rotate-center');
@@ -59,9 +60,9 @@ window.onload=function() {
             setTimeout(function () {
                 $(menu_list).css({ visibility: 'hidden' });
                 if($(window).scrollTop()>=berlin_offset-10){
-                    $(menu2).attr('src', '/media/menu_black.png');
+                    $(menu2).attr('src', 'media/menu_black.png');
                 }else {
-                    $(menu).attr('src', '/media/menu.png');
+                    $(menu).attr('src', 'media/menu.png');
                 }
                 $('.session_info').css({visibility: 'visible'});
             }, 500);
@@ -107,11 +108,29 @@ window.onload=function() {
             onSubmit();
         });
     }
-    
+   
+   var child_value = document.getElementById('child_value');
+   var value = child_value.value;
+   
+   setInterval(function()
+   {
+      if (child_value.value != value)
+      {
+         var nownow = child_value.value;
+         var strArray = nownow.split(',');
+         for(var i=0;i<strArray.length;i++){
+            var nownownow = document.getElementsByClassName('delete_cart');
+            $(nownownow[strArray[i]-1]).trigger('click');
+         }
+      }
+      value = child_value.value;
+   }, 500);
+
     function onSubmit() {
         var frm = document.frm;
         frm.action = '/delete_cart';
-        frm.method="POST"
+        frm.method="POST";
+      frm.target = '_self';
         frm.submit();
     }
     
@@ -128,6 +147,5 @@ window.onload=function() {
         frm.target='cart_buy_pop';
         frm.submit();
     }
-    
-    
+   
 };
