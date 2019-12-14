@@ -42,25 +42,21 @@ function execDaumPostcode() {
             document.getElementById("address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("detailAddress").focus();
+            var searchAddress = document.getElementById("address").value;
+            searchAddress += document.getElementById("detailAddress").value;
+            getCoordinate(searchAddress);
+
         }
     }).open();
 }
-window.onload = function(){
-    $('#testLocation').click(function () {
-        var searchAddress = document.getElementById("address").value;
-        searchAddress += document.getElementById("detailAddress").value;
-        getCoordinate(searchAddress);
+function getCoordinate(searchAddress) {
+    var geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(searchAddress, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            lat = result[0].y;
+            long = result[0].x;
+            document.getElementById("storeLocationLat").value = lat;
+            document.getElementById("storeLocationLong").value = long;
+        }
     });
-    
-    function getCoordinate(searchAddress) {
-        var geocoder = new kakao.maps.services.Geocoder();
-        geocoder.addressSearch(searchAddress, function (result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                lat =result[0].y;
-                long = result[0].x;
-                document.getElementById("storeLocationLat").value = lat;
-                document.getElementById("storeLocationLong").value = long;
-            }
-        });
-    }
 }

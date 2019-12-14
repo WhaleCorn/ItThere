@@ -209,8 +209,8 @@ $(document).ready(function () {
             return false;
         }
         return true;
-    })
-    ;
+    });
+    
     if(Object.keys(data).length === 0){
         $('.map').css('display', 'none');
         $('#table_name').css('display', 'none');
