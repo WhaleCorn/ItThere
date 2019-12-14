@@ -109,7 +109,7 @@ window.onload = function () {
                     str += '<tr><th>상점 명</th><td>' + item.s_name + '</td></tr>';
                     str += '<tr><th>상점 위치</th><td>' + item.s_location +' '+ item.s_location_detail+'</td></tr>';
                     str += '<tr><th>상점 전화번호</th><td>' + item.s_tell + '</td></tr>';
-                    str += '<tr><th>상점 이미지</th><td><img src="/' + item.storeImage + '" width="100px"/></td></tr>';
+                    str += '<tr><th>상점 이미지</th><td><img src="' + item.storeImage + '" width="300px"/></td></tr>';
                     str += '<tr><th></th><td><input type="button" value="delete"></td></tr>';
                 }
                 $(list_table).append(colgroup_str);

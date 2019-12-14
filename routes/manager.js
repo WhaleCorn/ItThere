@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var connection = require('../config/dbConnection');
-
+var path = require('path');
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (request, file, callback) {
@@ -274,25 +274,31 @@ router.post('/modifyMarket', upload.single('storeImage'), function (request, res
     var storeTell = request.body.storeTell;
     var storeLocationLong = request.body.storeLocationLong;
     var storeLocationLat = request.body.storeLocationLat;
-    if (request.file) {
-        var storeImagePath = '/files/market/' + request.file.filename;
-    }
-    else {
-        var storeImagePath = '/files/market/default.png';
-    }
+
     connection.query('SELECT s_idx FROM stores WHERE m_name = ?', [userId], function (error1, results, fields) {
         if (error1) {
             throw error1;
         }
         var s_idx = results[0].s_idx;
-        connection.query('UPDATE stores SET s_name = ?, s_location = ?, s_location_detail =?, s_tell = ?, s_location_long = ?, s_location_lat = ?, storeImage =? WHERE m_name =? AND s_idx = ?', [storeName, storeAddress, storeDetailAddress, storeTell, storeLocationLong, storeLocationLat, storeImagePath, userId, s_idx], function (error, results, fields) {
-            if (error) {
-                throw error;
-            }
-            response.redirect('/manager/market');
-        })
+        if (request.file) {
+            var storeImagePath = '/files/market/' + request.file.filename;
+            connection.query('UPDATE stores SET s_name = ?, s_location = ?, s_location_detail =?, s_tell = ?, s_location_long = ?, s_location_lat = ?, storeImage =? WHERE m_name =? AND s_idx = ?', [storeName, storeAddress, storeDetailAddress, storeTell, storeLocationLong, storeLocationLat, storeImagePath, userId, s_idx], function (error, results, fields) {
+                if (error) {
+                    throw error;
+                }
+            })
+    
+        }
+        else {
+            connection.query('UPDATE stores SET s_name = ?, s_location = ?, s_location_detail =?, s_tell = ?, s_location_long = ?, s_location_lat = ? WHERE m_name =? AND s_idx = ?', [storeName, storeAddress, storeDetailAddress, storeTell, storeLocationLong, storeLocationLat, userId, s_idx], function (error, results, fields) {
+                if (error) {
+                    throw error;
+                }
+            })
+        }
+        response.redirect('/manager/market');
 
-    })
+    });
 })
 
 
