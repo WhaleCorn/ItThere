@@ -105,7 +105,7 @@ window.onload=function() {
     
     $('.chat_start').click(function() {
         var index = $(this).index();
-        var market = $('.market_name').val();
+        var market = $('.market_name').html();
        window.open('/chatting?market='+market,name, 'resizable=no,width=500,height=700');
     });
     
