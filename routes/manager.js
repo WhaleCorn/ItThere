@@ -23,29 +23,46 @@ var upload = multer({ storage: storage });
 router.get('/', function (request, response) {
     response.render('manager');
 });
+router.get('/profile', function(request, response){
+    response.render('manager_profile', {username:request.session.username});
+});
+router.get('/checkProfile', function(request, response){
+    var checkId = request.session.username;
+    var checkPw = request.query.checkPw;
+    connection.query('SELECT * FROM managers WHERE m_id = ? AND m_pw = ?', [checkId, checkPw], function(error, results, fields){
+        if(error)
+        {
+            throw error;
+        }
+        if(results.length==1){
+            response.send({message:'success'});
+        }else{
+            response.send({message:'failed'});
+        }
+    })
+})
+router.get('/getProfile', function (request, response) {
 
-router.get('/profile', function (request, response) {
-	
-	connection.query('SELECT * from managers where m_id=?', [request.session.username], function(error, result) {
-		if(error) { console.log(error); }
-		else {
-			response.render('manager_profile', {username:request.session.username, result:result, login_mode:request.session.login_mode});
-		}
-	});
+    connection.query('SELECT * from managers where m_id=?', [request.session.username], function (error, result) {
+        if (error) { console.log(error); }
+        else {
+            response.send( { username: request.session.username, result: result, login_mode: request.session.login_mode });
+        }
+    });
 });
 
-router.post('/changeProfile', function(request, response) {
-	
-	var new_password = request.body.new_password;
-	var new_name = request.body.new_name;
-	
-	connection.query('update managers set m_pw=?, m_name=? where m_id=?', [new_password, new_name, request.session.username], function(error) {
-		if(error) { console.log(error); }
-		else { 
-			var result='수정이 완료되었습니다.';
-			response.send({result:result});
-		}
-	});
+router.post('/changeProfile', function (request, response) {
+
+    var new_password = request.body.new_password;
+    var new_name = request.body.new_name;
+
+    connection.query('update managers set m_pw=?, m_name=? where m_id=?', [new_password, new_name, request.session.username], function (error) {
+        if (error) { console.log(error); }
+        else {
+            var result = '수정이 완료되었습니다.';
+            response.send({ result: result });
+        }
+    });
 })
 
 router.get('/getMarketList', function (request, response) {
@@ -62,8 +79,8 @@ router.get('/getMarketList', function (request, response) {
 });
 
 router.get('/chatting', function (request, response) {
-	var market=request.query.market;
-    response.render('manager_chatting', {market:market});
+    var market = request.query.market;
+    response.render('manager_chatting', { market: market });
 });
 
 router.post('/products', function (request, response) {
@@ -73,7 +90,7 @@ router.post('/products', function (request, response) {
         if (error) {
             throw error;
         }
-        response.render('manager_products', {username: userId, market: results[0].s_idx, market_name: results[0].s_name });
+        response.render('manager_products', { username: userId, market: results[0].s_idx, market_name: results[0].s_name });
     });
 });
 
@@ -86,10 +103,10 @@ router.get('/products', function (request, response) {
         }
         if (result.length > 0) {
 
-            response.render('manager_products', {username: username, market: result[0].s_idx, market_name: result[0].s_name, username:request.session.username, login_mode:request.session.login_mode });
+            response.render('manager_products', { username: username, market: result[0].s_idx, market_name: result[0].s_name, username: request.session.username, login_mode: request.session.login_mode });
         }
         else {
-            response.render('manager_products', {username: username, market: 0, market_name: '보유한 매장이 없습니다.' });
+            response.render('manager_products', { username: username, market: 0, market_name: '보유한 매장이 없습니다.' });
         }
     })
 
@@ -150,7 +167,11 @@ router.get('/getMarketInfo', function (request, response) {
         if (error) {
             throw error;
         }
-        storeName = results[0].s_name;
+        if (results.length > 0) {
+            storeName = results[0].s_name;
+        } else {
+            storeName = null;
+        }
     });
     connection.query('SELECT max(s_idx) maxIndex FROM stores WHERE s_idx<? AND m_name = ?', [storeIndex, userId], function (error, results, fields) {
         if (error) {
@@ -204,7 +225,7 @@ router.get('/market', function (request, response) {
                 response.render('manager_market', { username: username, market: result[0].s_idx, market_name: result[0].s_name });
             }
             else {
-                response.render('manager_market', {username: username, market: 0, market_name: '보유한 매장이 없습니다.' });
+                response.render('manager_market', { username: username, market: 0, market_name: '보유한 매장이 없습니다.' });
             }
         });
     } else {
@@ -224,12 +245,11 @@ router.post('/insertMarket', upload.single('storeImage'), function (request, res
     var storeLocationLong = request.body.storeLocationLong;
     var storeLocationLat = request.body.storeLocationLat;
     var storeImagePath = '';
-    console.log(request.file);
     if (request.file) {
         storeImagePath = '/files/market/' + request.file.filename;
     }
     else {
-        storeImagePath = '/files/market/default.png';
+        storeImagePath = '/files/market/default.jpg';
     }
     connection.query('SELECT m_idx FROM managers WHERE m_id = ?', [userId], function (error1, results, fields) {
         if (error1) {
@@ -255,7 +275,7 @@ router.get('/market/modify', function (request, response) {
             throw error;
         }
         response.render('manager_market_modify', {
-            username:request.session.username,
+            username: request.session.username,
             storeName: results[0].s_name,
             storeDetailAddress: results[0].s_location_detail,
             storeAddress: results[0].s_location,
@@ -287,7 +307,7 @@ router.post('/modifyMarket', upload.single('storeImage'), function (request, res
                     throw error;
                 }
             })
-    
+
         }
         else {
             connection.query('UPDATE stores SET s_name = ?, s_location = ?, s_location_detail =?, s_tell = ?, s_location_long = ?, s_location_lat = ? WHERE m_name =? AND s_idx = ?', [storeName, storeAddress, storeDetailAddress, storeTell, storeLocationLong, storeLocationLat, userId, s_idx], function (error, results, fields) {
@@ -345,7 +365,7 @@ router.post('/insertProduct', function (request, response) {
     var newGoodsStockNum = request.body.newGoodsStockNum;
     var s_idx = request.body.s_idx;
     connection.query('SELECT * FROM goods WHERE g_category =? AND g_name = ? AND g_account = ? AND g_s_idx = ?', [newGoodsCategory, newGoodsName, newGoodsPrice, s_idx], function (error1, results, fields) {
-        if(error1){
+        if (error1) {
             throw error1;
         }
         if (results.length == 0) {
@@ -354,36 +374,48 @@ router.post('/insertProduct', function (request, response) {
                     throw error;
                 }
                 response.send({
-                    message:'success'
+                    message: 'success'
                 });
             })
         } else {
             connection.query('UPDATE goods SET g_stock_num = g_stock_num + ? WHERE g_category =? AND g_name = ? AND g_account = ? AND g_s_idx = ?', [newGoodsStockNum, newGoodsCategory, newGoodsName, newGoodsPrice, s_idx], function (error2, results, fields) {
                 if (error2) {
                     throw error2;
-                }                response.send({
-                    message:'success'
+                } response.send({
+                    message: 'success'
                 });
             })
         }
     });
 })
 
-router.get('/deleteProduct', function(request, response){
+router.get('/deleteProduct', function (request, response) {
     var goodsIndex = request.query.goodsIndex;
-    if(goodsIndex){
-        connection.query('DELETE FROM goods WHERE g_idx = ?', [goodsIndex], function(error, results, fields){
-            if(error){
+    if (goodsIndex) {
+        connection.query('DELETE FROM goods WHERE g_idx = ?', [goodsIndex], function (error, results, fields) {
+            if (error) {
                 throw error;
             }
             response.send({
-                message:'success'
+                message: 'success'
             });
         })
-    }else{
+    } else {
         response.send({
             message: 'error'
         })
     }
+})
+
+router.get('/deleteMarket', function(request, response){
+    var storeIndex = request.query.storeIndex;
+    connection.query('DELETE FROM stores WHERE s_idx = ?', [storeIndex], function(error, results, fields){
+        if(error){
+            throw error;
+        }
+        response.send({
+            message: 'success'
+        })
+    })
 })
 module.exports = router;

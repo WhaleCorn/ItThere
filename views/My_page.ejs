@@ -43,13 +43,22 @@
         </div>
     </header>
     <div style="clear:both; height:500px;"></div>
-	<input type="hidden" id="user_db_info" value="<%=JSON.stringify(result)%>">
+<!--	<input type="hidden" id="user_db_info" value="<%=JSON.stringify(result)%>">-->
 	<input type="hidden" id="login_mode" value="<%=login_mode%>">
     <section>
         <img src="media/menu_line.png"/><p>P r o f i l e</p>
 		<div id="form_div">
-			<img src="media/logo_black.png" id="vibrate_image"/>
-			<form>
+            <img src="media/logo_black.png" id="vibrate_image"/>
+            <div id="infoCheck">
+                <ul>
+                    <li><h3>ID : </h3><input type="text" id="checkId" name="checkId" value="<%=username%>" readonly></li>
+                    <li><h3>Password : </h3><input type="password" id="checkPw" name="checkPw" value="" placeholder="비밀번호를 입력해주세요."></li>
+            </ul>
+                <div id="checkButton">
+                    <h3>정보 확인</h3>
+                </div>
+            </div>
+			<form id="profileInfo">
 				<div id="profile_db">
 					<ul>
 						<li><h3>Authority : </h3><input type="text" id="user_mode" value="" readonly></li>

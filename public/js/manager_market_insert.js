@@ -97,10 +97,6 @@ function checkMarketForm() {
     } else if (!document.getElementById('address').value) {
         alert('상점 위치를 입력해주세요.');
         return false;
-    } else if (!document.getElementById('detailAddress').value) {
-        alert('상세 주소를 입력해주세요.');
-        document.getElementById('detailAddress').focus();
-        return false;
     } else if (!document.getElementById('storeTell').value) {
         alert('전화번호를 입력해주세요.');
         document.getElementById('storeTell').focus();

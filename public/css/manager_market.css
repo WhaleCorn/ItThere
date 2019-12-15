@@ -215,28 +215,11 @@ th input {
   visibility: hidden;
 }
 
-#market_add,  #market_modify {
-  display: inline-block;
-  background-color:#ceb980;
-  width:20%;
-  height:50px;
-  margin:3% auto;
+#buttonArea{
   text-align: center;
-  border-radius: 5px;
-  box-shadow: 5px 5px 10px 20grey;
-  cursor:pointer;
-  opacity:0.5;
 }
 
-#market_add:hover,  #market_modify:hover {
-  -webkit-animation: shake-lr 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-              animation: shake-lr 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-  opacity:0.9;
-}
 
-#market_add h3,  #market_modify:hover h3{
-  padding-top:5%;
-}
 
 a{
       text-decoration: none;
@@ -258,7 +241,25 @@ left:5%;
 right:5%;
 top:15%;
 
+}
+.button {
+  background-color:#ceb980;
+  width:20%;
+  height:50px;
+  margin:3% auto;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px 20grey;
+  cursor:pointer;
+  opacity:0.5;
+  display: inline-block;
+}
 
+.button:hover {
+  -webkit-animation: shake-lr 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+              animation: shake-lr 0.7s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  opacity:0.9;
+}
 
 
 
