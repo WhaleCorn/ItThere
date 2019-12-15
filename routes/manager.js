@@ -23,21 +23,24 @@ var upload = multer({ storage: storage });
 router.get('/', function (request, response) {
     response.render('manager');
 });
-router.get('/profile', function(request, response){
-    response.render('manager_profile', {username:request.session.username});
+router.get('/profile', function (request, response) {
+    if (request.session.username) {
+        response.render('manager_profile', { username: request.session.username });
+    } else {
+        response.redirect('/login/manager');
+    }
 });
-router.get('/checkProfile', function(request, response){
+router.get('/checkProfile', function (request, response) {
     var checkId = request.session.username;
     var checkPw = request.query.checkPw;
-    connection.query('SELECT * FROM managers WHERE m_id = ? AND m_pw = ?', [checkId, checkPw], function(error, results, fields){
-        if(error)
-        {
+    connection.query('SELECT * FROM managers WHERE m_id = ? AND m_pw = ?', [checkId, checkPw], function (error, results, fields) {
+        if (error) {
             throw error;
         }
-        if(results.length==1){
-            response.send({message:'success'});
-        }else{
-            response.send({message:'failed'});
+        if (results.length == 1) {
+            response.send({ message: 'success' });
+        } else {
+            response.send({ message: 'failed' });
         }
     })
 })
@@ -46,7 +49,7 @@ router.get('/getProfile', function (request, response) {
     connection.query('SELECT * from managers where m_id=?', [request.session.username], function (error, result) {
         if (error) { console.log(error); }
         else {
-            response.send( { username: request.session.username, result: result, login_mode: request.session.login_mode });
+            response.send({ username: request.session.username, result: result, login_mode: request.session.login_mode });
         }
     });
 });
@@ -80,7 +83,11 @@ router.get('/getMarketList', function (request, response) {
 
 router.get('/chatting', function (request, response) {
     var market = request.query.market;
-    response.render('manager_chatting', { market: market });
+    if (request.session.username && request.session.login_mode == "2") {
+        response.render('manager_chatting', { market: market });
+    } else {
+        response.redirect('/login/manager');
+    }
 });
 
 router.post('/products', function (request, response) {
@@ -97,18 +104,24 @@ router.post('/products', function (request, response) {
 router.get('/products', function (request, response) {
     //
     var username = request.session.username;
-    connection.query('SELECT * FROM stores WHERE s_idx=(SELECT min(s_idx) FROM stores where s_idx>0 and m_name=?)', [username], function (error, result) {
-        if (error) {
-            throw error;
-        }
-        if (result.length > 0) {
+    if (username) {
+        connection.query('SELECT * FROM stores WHERE s_idx=(SELECT min(s_idx) FROM stores where s_idx>0 and m_name=?)', [username], function (error, result) {
+            if (error) {
+                throw error;
+            }
+            if (result.length > 0) {
 
-            response.render('manager_products', { username: username, market: result[0].s_idx, market_name: result[0].s_name, username: request.session.username, login_mode: request.session.login_mode });
-        }
-        else {
-            response.render('manager_products', { username: username, market: 0, market_name: '보유한 매장이 없습니다.' });
-        }
-    })
+                response.render('manager_products', { username: username, market: result[0].s_idx, market_name: result[0].s_name, username: request.session.username, login_mode: request.session.login_mode });
+            }
+            else {
+                response.render('manager_products', { username: username, market: 0, market_name: '보유한 매장이 없습니다.' });
+            }
+        })
+    }
+    else {
+        response.redirect('/login/manager');
+
+    }
 
 });
 
@@ -234,7 +247,11 @@ router.get('/market', function (request, response) {
 });
 
 router.get('/market/insert', function (request, response) {
-    response.render('manager_market_insert', { username: request.session.username });
+    if (request.session.username) {
+        response.render('manager_market_insert', { username: request.session.username });
+    } else {
+        response.redirect('/login/manager');
+    }
 });
 router.post('/insertMarket', upload.single('storeImage'), function (request, response) {
     var userId = request.session.username;
@@ -270,21 +287,26 @@ router.post('/insertMarket', upload.single('storeImage'), function (request, res
 
 router.get('/market/modify', function (request, response) {
     var marketIndex = request.query.marketIndex;
-    connection.query('SELECT * FROM stores WHERE s_idx = ?', [marketIndex], function (error, results, fields) {
-        if (error) {
-            throw error;
-        }
-        response.render('manager_market_modify', {
-            username: request.session.username,
-            storeName: results[0].s_name,
-            storeDetailAddress: results[0].s_location_detail,
-            storeAddress: results[0].s_location,
-            storeLocationLong: results[0].s_location_long,
-            storeLocationLat: results[0].s_location_lat,
-            storeTell: results[0].s_tell,
-            storeImage: results[0].storeImage
+    if (request.session.username) {
+        connection.query('SELECT * FROM stores WHERE s_idx = ?', [marketIndex], function (error, results, fields) {
+            if (error) {
+                throw error;
+            }
+            response.render('manager_market_modify', {
+                username: request.session.username,
+                storeName: results[0].s_name,
+                storeDetailAddress: results[0].s_location_detail,
+                storeAddress: results[0].s_location,
+                storeLocationLong: results[0].s_location_long,
+                storeLocationLat: results[0].s_location_lat,
+                storeTell: results[0].s_tell,
+                storeImage: results[0].storeImage
+            });
         });
-    });
+    } else {
+        response.redirect('/login/manager');
+    }
+ 
 });
 router.post('/modifyMarket', upload.single('storeImage'), function (request, response) {
     var userId = request.session.username;
@@ -407,10 +429,10 @@ router.get('/deleteProduct', function (request, response) {
     }
 })
 
-router.get('/deleteMarket', function(request, response){
+router.get('/deleteMarket', function (request, response) {
     var storeIndex = request.query.storeIndex;
-    connection.query('DELETE FROM stores WHERE s_idx = ?', [storeIndex], function(error, results, fields){
-        if(error){
+    connection.query('DELETE FROM stores WHERE s_idx = ?', [storeIndex], function (error, results, fields) {
+        if (error) {
             throw error;
         }
         response.send({

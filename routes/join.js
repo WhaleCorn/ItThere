@@ -3,7 +3,11 @@ var router = express.Router();
 var connection = require('../config/dbConnection');
 
 router.get('/', function (request, response) {
-    response.render('join', { success: "회원가입 페이지" });
+    if(!request.session.username){
+        response.render('join', { success: "회원가입 페이지" });
+    }else{
+        response.send('<script type="text/javascript>alert("잘못된 접근입니다.")</script>')
+    }
 });
 
 
