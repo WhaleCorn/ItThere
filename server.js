@@ -75,7 +75,7 @@ app.get('/chatting', function (request, response) {
     response.render('chatting', { username: request.session.username, login_mode: request.session.login_mode, market: market });
 });
 
-app.use('/files', express.static('/uploads'));
+app.use('/files', express.static('./uploads'));
 
 var cartList = [];
 
