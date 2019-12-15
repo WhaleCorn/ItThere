@@ -211,10 +211,10 @@ $(document).ready(function () {
         return true;
     });
     
-    if(Object.keys(data).length === 0){
+    if(!data){
         $('.map').css('display', 'none');
         $('#table_name').css('display', 'none');
         $('#table_scroll').css('display', 'none');
         document.getElementById('keyword_text').innerHTML ='검색 결과가 없습니다.';
-    }
+    }    
 });

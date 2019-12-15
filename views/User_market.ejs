@@ -4,6 +4,7 @@
 <head>
     <title>Market</title>
     <link rel="stylesheet" href="/css/User_market.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="/js/User_market.js"></script>
     <meta charset="UTF-8" />
@@ -49,7 +50,7 @@
         <fieldset>
             <div>
                 <form action="/user/searchMarket" id="searchMarketForm" method="GET">
-                <input type="search" class="search_text" id="keyword" name="keyword" placeholder="Search.." />
+                <input type="search" class="search_text" id="keyword" name="keyword" value="<%=keyword%>" placeholder="Search.." />
                 <button type="submit" class="search_button">
                     <img class="fa" src="/media/search_black.png" />
                 </button>
@@ -68,6 +69,22 @@
         </div>
 -->
     </section>
+    <footer id="footer">
+        <a href="/"><div id="footer_logo"><img style="width: 100%;" src="/media/logo_white_shadow.png"></div id="footer_logo"></a>
+        <div class="info">
+            IT THERE Corp.<br>
+            CEO : 김예지, 이수아, 지수연<br>
+            ADDRESS : 232, Gongneung-ro, Nowon-gu, Seoul<br>
+            CONTANCT US : 02-970-0000
+        </div>
+        <div class="f_links">
+            <a href="/">회 사 소 개</a> | <a href="/" target="_blank">약 관</a> | <a href="/" target="_blank">개 인 정 보 취 급 방 침</a>
+        </div>
+        <div class="copyright">
+            Seoultech @ Advanced Web Programming<br>
+            #dp.wl #heo.sua.b #ssuyeon © It There
+        </div>
+    </footer>
 </body>
 
 </html>
