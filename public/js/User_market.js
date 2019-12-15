@@ -95,7 +95,7 @@ window.onload=function() {
             output += '<div class="open_div"><img src="'+data[i].storeImage+'" class="market_img">';
             output += '<table class="open_info"><tr><th>'+data[i].s_name+'</th></tr><tr><td class="td1">주소 : '+data[i].s_location+'</td></tr><tr><td class="td2">상세주소 : ';
             output += data[i].s_location_detail+'</td></tr><tr><td class="td3">전화번호 : '+data[i].s_tell+'</td><tr>';
-            output += '<td class="td4"><div class="chat_start">관리자 : <input type="text" class="market_name" value='+data[i].m_name+' disabled/></div><td></tr></table>';
+            output += '<td class="td4"><div class="chat_start">관리자 : <h3 class="market_name">'+data[i].m_name+' </h3></div><td></tr></table>';
             $(marketInfo).append(output);
             index++;
         });
