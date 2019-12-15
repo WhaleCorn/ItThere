@@ -10,24 +10,7 @@ var connection = require('./config/dbConnection');
 var app = express();  //웹 서버 생성
 
 
-var greenlock = require('greenlock-express');
-var lex = greenlock.create({
-    version: 'draft-11',
-    configDir:'/etc/letsencrypt',
-    server: 'https://acme-v02.api.letsencrypt.org/directory',
-    approveDomains: (opts, certs, cb)=>{
-        if(certs){
-            opts.domains = ['itthere.co.kr', 'www.itthere.co.kr'];
-        }else{
-            opts.email = '77sy777@gmail.com';
-            opts.aggreeTos = true;
-        }
-        cb(null,{ options: opts, certs});
-     },
-     renewWithin: 81 *24*60*60*1000,
-     renewBy:80*24*60*60*1000
-});
-
+var lex = require('./en');
 https.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL_PROT ||443);
 var server = http.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
 var io = socket(server);
