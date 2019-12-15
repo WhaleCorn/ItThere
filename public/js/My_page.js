@@ -146,7 +146,6 @@ window.onload=function() {
 			
 			if($('#user_password').val()=='' || $('#user_name').val()==''){
 				alert('빈 항목이 존재합니다.');
-				location.reload();
 			}else {
 				changeProfile($('#user_password').val(), $('#user_name').val());
 			}
