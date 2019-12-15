@@ -296,7 +296,9 @@ fieldset div {
 }
 
 
-
+.market_name{
+        display: inline;
+}
 
 
 @-webkit-keyframes kenburns-top {
