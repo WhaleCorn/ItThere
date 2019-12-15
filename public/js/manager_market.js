@@ -110,7 +110,7 @@ window.onload = function () {
                     str += '<tr><th>상점 위치</th><td>' + item.s_location +' '+ item.s_location_detail+'</td></tr>';
                     str += '<tr><th>상점 전화번호</th><td>' + item.s_tell + '</td></tr>';
                     str += '<tr><th>상점 이미지</th><td><img src="' + item.storeImage + '" width="300px"/></td></tr>';
-                    str += '<tr><th></th><td><input type="button" value="delete"></td></tr>';
+                    str += '<tr><th style="text-decoration:none;"></th><td><div class="button" id="deleteMarketButton"><h3>Delete</h3></div></td></tr>';
                 }
                 $(list_table).append(colgroup_str);
                 $(list_table).append(str);
@@ -145,7 +145,32 @@ window.onload = function () {
 
     $('#market_modify').click(function(){
         var targetIndex =document.getElementById('s_idx').value;
-        location.href='/manager/market/modify?marketIndex='+targetIndex;
+        if(targetIndex==0){
+            alert('수정할 상점이 없습니다.');
+        }else{
+            location.href='/manager/market/modify?marketIndex='+targetIndex;
+        }
     });
+    $(document).on("click","#deleteMarketButton", (function(){
+        alert('ee');
+        $.ajax({
+            url:'/manager/deleteMarket',
+            type:'get',
+            dataType:'json',
+            data: {
+                storeIndex: s_idx
+            },
+            cache: false,
+            success: function(data){
+                if(data.message == 'success'){
+                    alert('매장이 삭제되었습니다.');
+                    s_idx = beforeStoreIndex;
+                    $('#s_idx').val(s_idx);
+                    getMarketInfo();
+                }
+            }
+        })
+    }
+    ));
     getMarketInfo();
 };

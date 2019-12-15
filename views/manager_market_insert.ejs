@@ -51,7 +51,7 @@
     <img src="/media/menu_line.png" />
     <p>M a r k e t</p>
     <div id="market_insert_title">
-        <input type="text" id="userId" value="<%=username%>">
+        <input type="text" id="userId" value="<%=username%>" readonly>
     </div>
     <div id="market_insert_board">
         <form action="/manager/insertMarket" method="POST" id="insertMarketForm" onsubmit="return checkMarketForm();"

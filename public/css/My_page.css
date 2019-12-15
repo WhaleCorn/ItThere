@@ -234,7 +234,9 @@ input[type="text"] {
 
 
 
-
+#profileInfo{
+  visibility: hidden;
+}
 
 
 
