@@ -11,11 +11,9 @@ var server = http.Server(app);
 var io = socket(server);
 
 
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 
 app.use(session({
-    secret: 'secret',
+    secret: 'defjewvsplasd;',
     resave: true,
     saveUninitialized: true
 }));
@@ -49,30 +47,19 @@ app.get('/logout', function (request, response) {
     response.send('<script type="text/javascript">alert("로그아웃 되었습니다."); window.location="/"; </script>');
 });
 
-app.get('/testMypage', function (request, response) {
-    response.render('mypage');
-});
-app.get('/mypageCheck', function (request, response) {
-    response.render('mypage_check');
-});
-app.get('/My_page', function (request, response) {
-
-    connection.query('SELECT * from customers where c_id=?', [request.session.username], function (error, result) {
-        if (error) { throw error; }
-        else {
-            response.render('My_page', { username: request.session.username, result: result, login_mode: request.session.login_mode });
-        }
-    });
-});
 
 app.post('/drop_manager', function (request, response) {
 
 });
 
-
 app.get('/chatting', function (request, response) {
     var market = request.query.market;
-    response.render('chatting', { username: request.session.username, login_mode: request.session.login_mode, market: market });
+    if(!request.session.username){
+        response.redirect('/');
+    }
+    else{
+        response.render('chatting', { username: request.session.username, login_mode: request.session.login_mode, market: market });
+    }
 });
 
 app.use('/files', express.static('./uploads'));
@@ -83,30 +70,33 @@ app.get('/Cart', function (request, response) {
     var cart = request.cookies.cart;
     var username = request.session.username;
     var index = 1;
-
-    if (!cart) {
-        response.render('Cart', { username: username, str: '장바구니가 비었습니다.', cart: null, error: '0' });
-    }
-    else {
-        var output = '';
-        var count = 0;
-        for (var id in cart) {
-            if (cart[id] != 0) {
-                var point = id.indexOf(')');
-                var ss_name = id.substring(1, point);
-                var gg_name = id.substring(point + 1, id.length);
-                var delete_str = 'delete';
-                var class_str = 'delete_cart';
-                var button_str = 'button';
-
-                output += `<tr><td>${index}</td><th>${gg_name}</th><td>${ss_name}</td><td>${cart[id]}개</td><td><input type=${button_str} class=${class_str} value=${delete_str} readonly></td></tr>`
-                index++;
+    if(username && request.session.login_mode=="1"){
+        if (!cart) {
+            response.render('Cart', { username: username, str: '장바구니가 비었습니다.', cart: null, error: '0' });
+        }
+        else {
+            var output = '';
+            var count = 0;
+            for (var id in cart) {
+                if (cart[id] != 0) {
+                    var point = id.indexOf(')');
+                    var ss_name = id.substring(1, point);
+                    var gg_name = id.substring(point + 1, id.length);
+                    var delete_str = 'delete';
+                    var class_str = 'delete_cart';
+                    var button_str = 'button';
+    
+                    output += `<tr><td>${index}</td><th>${gg_name}</th><td>${ss_name}</td><td>${cart[id]}개</td><td><input type=${button_str} class=${class_str} value=${delete_str} readonly></td></tr>`
+                    index++;
+                }
             }
-        }
-        if (output == '') {
-            response.clearCookie('cart');
-        }
-        response.render('Cart', { username: username, cart: output });
+            if (output == '') {
+                response.clearCookie('cart');
+            }
+            response.render('Cart', { username: username, cart: output });
+        }    
+    }else{
+        response.redirect('/login/user');
     }
 
 });
