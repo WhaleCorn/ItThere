@@ -32,7 +32,7 @@ https.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL
 var server = http.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
 var io = socket(server);
 app.use(session({
-    secret: 'defjewvsplasd;',
+    secret: 'defjewvspdfdfdsflasd;',
     resave: true,
     saveUninitialized: true
 }));
