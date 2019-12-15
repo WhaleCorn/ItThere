@@ -1,4 +1,5 @@
 var http = require('http');
+var https = require('https');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -7,11 +8,29 @@ var socket = require('socket.io');
 var cookieParser = require('cookie-parser');
 var connection = require('./config/dbConnection');
 var app = express();  //웹 서버 생성
-var server = http.Server(app);
+
+
+var greenlock = require('greenlock-express');
+var lex = greenlock.create({
+    version: 'draft-11',
+    configDir:'/etc/letsencrypt',
+    server: 'https://acme-v02.api.letsencrypt.org/directory',
+    approveDomains: (opts, certs, cb)=>{
+        if(certs){
+            opts.domains = ['itthere.co.kr', 'www.itthere.co.kr'];
+        }else{
+            opts.email = '77sy777@gmail.com';
+            opts.aggreeTos = true;
+        }
+        cb(null,{ options: opts, certs});
+     },
+     renewWithin: 81 *24*60*60*1000,
+     renewBy:80*24*60*60*1000
+});
+
+https.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL_PROT ||443);
+var server = http.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
 var io = socket(server);
-
-
-
 app.use(session({
     secret: 'defjewvsplasd;',
     resave: true,
@@ -282,6 +301,4 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-server.listen(3000, function () {
-    console.log('Server On !');
-});
+
