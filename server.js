@@ -1,5 +1,4 @@
 var http = require('http');
-var https = require('https');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -8,14 +7,13 @@ var socket = require('socket.io');
 var cookieParser = require('cookie-parser');
 var connection = require('./config/dbConnection');
 var app = express();  //웹 서버 생성
-
-
-var lex = require('./en');
-https.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL_PROT ||443);
-var server = http.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
+var server = http.Server(app);
 var io = socket(server);
+
+
+
 app.use(session({
-    secret: 'defjewvspdfdfdsflasd;',
+    secret: 'defjewvsplasd;',
     resave: true,
     saveUninitialized: true
 }));
@@ -284,4 +282,6 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
+server.listen(3000, function () {
+    console.log('Server On !');
+});
