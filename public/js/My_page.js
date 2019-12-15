@@ -84,15 +84,45 @@ window.onload=function() {
         }
     });
 	
-	var rawData = document.getElementById('user_db_info').value;
-    var data = JSON.parse(rawData);
-	var login_mode = document.getElementById('login_mode').value;
-	var modifyStr = document.getElementById('modifyStr');
-	
-	$('#user_id').val(data[0].c_id);
-	$('#user_password').val(data[0].c_pw);
-	$('#user_name').val(data[0].c_name);
-	if(login_mode=="1") { $('#user_mode').val('User'); }
+    $('.infoList').hide();
+    $('.modify_info').hide();
+    $('#drop_info').hide();
+	$('#checkButton').click(function(){
+        $.ajax({
+            url:'/user/checkProfile',
+            type:'get',
+            dataType:'json',
+            cache:false,
+            data:{
+                checkPw:document.getElementById('checkPw').value
+            },
+            success: function(data){
+                if(data.message == 'success'){
+                    $('.infoList').show();
+                    $('.modify_info').show();
+                    $('#drop_info').show();
+                    $('.checkList').hide();
+                    $('#checkButton').hide();
+                    getProfile();
+                }else{
+                    alert('비밀번호가 알맞지 않습니다.');
+                }
+            }
+        })
+    });
+    function getProfile(){
+        $.ajax({
+            url:'/user/getProfile',
+            type:'get',
+            success: function(result){
+                var data = result.result;
+                $('#user_id').val(data[0].c_id);
+                $('#user_password').val(data[0].c_pw);
+                $('#user_name').val(data[0].c_name);
+                if(result.login_mode=="1") { $('#user_mode').val('User'); }
+            }
+        })
+    }
 	
 	$('.modify_info').click(function() {
 //		alert($(this).children().text());
