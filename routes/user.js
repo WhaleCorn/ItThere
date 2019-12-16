@@ -80,8 +80,13 @@ router.get('/searchProduct', function (request, response) {
 
 });
 router.get('/myPage', function (request, response) {
+    if(request.session.username){
+        response.render('My_page', { username: request.session.username });
+    }
+    else {
+        response.send('<script type="text/javascript">alert("로그인한 사용자만 작성할 수 있습니다."); window.location="/login/user"; </script>');
 
-    response.render('My_page', { username: request.session.username });
+    }
 });
 router.get('/checkProfile', function (request, response) {
     var checkId = request.session.username;

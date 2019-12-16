@@ -3,18 +3,30 @@ var router = express.Router();
 var connection = require('../config/dbConnection');
 
 router.get('/user', function (request, response) {
+    if(!request.session.username){
     request.session.login_mode = "1";
     response.render('login', { success: "로그인 페이지" });
+    }
+    else{
+        response.send('<script type="text/javascript>alert("잘못된 접근입니다.")</script>')
+    }
+
 });
 router.get('/manager', function (request, response) {
-    request.session.login_mode = "2";
-    response.render('login', {});
-});
+    if(!request.session.username){
+        request.session.login_mode = "2";
+        response.render('login', { success: "로그인 페이지" });
+        }
+        else{
+            response.send('<script type="text/javascript>alert("잘못된 접근입니다.")</script>')
+        }
+    
+    });
 
 router.post('/process', function (request, response) {
     var username = request.body.username;
     var userpw = request.body.userpw;
-    if(!request.session.username){
+
         if (request.session.login_mode == "1") {
             connection.query('SELECT * FROM customers WHERE c_id=? and c_pw=?', [username, userpw], function (error, results, fields) {
                 if (results.length > 0) {
@@ -37,9 +49,5 @@ router.post('/process', function (request, response) {
                 }
             })
         }
-    }
-    else{
-        response.send('<script type="text/javascript>alert("잘못된 접근입니다.")</script>')
-    }
 })
 module.exports = router;
