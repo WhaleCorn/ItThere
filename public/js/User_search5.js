@@ -88,7 +88,7 @@ $(document).ready(function () {
         center: new kakao.maps.LatLng(37.631719, 127.077487), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨 
     };
-
+    var changedCenter = mapOption.center;
     var map = new kakao.maps.Map(mapContainer, mapOption);  // 지도 생성
     if (navigator.geolocation) {
         // 접속 위치 얻기
@@ -97,13 +97,17 @@ $(document).ready(function () {
             var lon = position.coords.longitude;
 
             var locPosition = new kakao.maps.LatLng(lat, lon);
+            changedCenter = locPosition;
             var message = '<div style="">여기 계신가요?</div>';
             map.setCenter(locPosition);
             displayMarker(locPosition, message);
         });
     } else {
         var locPosition = new kakao.maps.LatLng(37.631719, 127.077487);
+        changedCenter = locPosition;
         map.setCenter(locPosition);
+        var message = '<div style="">여기 계신가요?</div>';
+        displayMarker(locPosition, message);
     }
 
     // 지도에 마커와 인포 윈도우 표시하는 함수
@@ -135,8 +139,9 @@ $(document).ready(function () {
     var rawData = document.getElementById('resultData').value;
     var data = JSON.parse(rawData);
     var bounds = new kakao.maps.LatLngBounds();
+    bounds.extend(changedCenter);
     // DB에서 불러온 위치정보를 통해 지도에 표시
-    if (data) {
+    if (data.length>0) {
 
 
         for (var i = 0; i < data.length; i++) {
@@ -144,13 +149,13 @@ $(document).ready(function () {
             message = '<div>' + data[i].s_name + '</div>';
 
             var pathLine = new kakao.maps.Polyline({
-                path: [mapOption.center, coords]
+                path: [changedCenter, coords]
             });
             var distance = Math.round(pathLine.getLength());
             data[i].distance = distance;
             bounds.extend(coords);
             displayMarker(coords, message);
-        }
+        } 
         map.setBounds(bounds);
         // 현재 위치에서 가까운 거리 순으로 정렬
         data.sort(function (a, b) {
