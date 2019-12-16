@@ -7,23 +7,12 @@ var socket = require('socket.io');
 var cookieParser = require('cookie-parser');
 var connection = require('./config/dbConnection');
 var app = express();  //웹 서버 생성
-
-var fs =require('fs');
-var https = require('https');
-var options ={
-    key: fs.readFileSync('/etc/letsencrypt/live/www.itthere.co.kr/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/www.itthere.co.kr/cert.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/www.itthere.co.kr/chain.pem')
-};
-var server =http.createServer(app).listen(80, function(){
-    console.log('Server on!');
-});
-https.createServer(options, app).listen(443, function(){
-
-});
+var server = http.Server(app);
 var io = socket(server);
 
-  app.use(session({
+
+
+app.use(session({
     secret: 'defjewvsplasd;',
     resave: true,
     saveUninitialized: true
@@ -289,4 +278,7 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error');
+});
+server.listen(3000, function () {
+    console.log('Server On !');
 });
