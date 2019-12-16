@@ -15,9 +15,9 @@ const lex = require('greenlock-express').create({
     server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
     approveDomains: (opts, certs, cb) => {
       if (certs) {
-        opts.domains = ['example.com', 'www.example.com'];
+        opts.domains = ['ittehre.co.kr', 'www.itthere.co.kr'];
       } else {
-        opts.email = 'example@example.com';
+        opts.email = '77sy777@gmail.com';
         opts.agreeTos = true;
       }
       cb(null, { options: opts, certs });
