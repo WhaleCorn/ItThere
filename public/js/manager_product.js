@@ -148,7 +148,7 @@ window.onload = function () {
             alert('0 이상의 수만 가능합니다.');
         } else {
             $.ajax({
-                url: '/modifyProduct',
+                url: '/manager/modifyProduct',
                 dataType: 'json',
                 data: {
                     goodsIndex: goodsIndex,
