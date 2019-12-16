@@ -134,7 +134,7 @@ $(document).ready(function () {
 
     var rawData = document.getElementById('resultData').value;
     var data = JSON.parse(rawData);
-
+    var bounds = new kakao.maps.LatLngBounds();
     // DB에서 불러온 위치정보를 통해 지도에 표시
     if (data) {
 
@@ -148,10 +148,10 @@ $(document).ready(function () {
             });
             var distance = Math.round(pathLine.getLength());
             data[i].distance = distance;
-
+            bounds.extend(coords);
             displayMarker(coords, message);
         }
-
+        map.setBounds(bounds);
         // 현재 위치에서 가까운 거리 순으로 정렬
         data.sort(function (a, b) {
             return a.distance < b.distance ? -1 : 1;
