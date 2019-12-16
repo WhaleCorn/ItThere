@@ -7,12 +7,28 @@ var socket = require('socket.io');
 var cookieParser = require('cookie-parser');
 var connection = require('./config/dbConnection');
 var app = express();  //웹 서버 생성
-var server = http.Server(app);
-var io = socket(server);
 
+const lex = require('greenlock-express').create({
+    version: 'draft-11', // 버전2
+    configDir: '/etc/letsencrypt', // 또는 ~/letsencrypt/etc
+    server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
+    approveDomains: (opts, certs, cb) => {
+      if (certs) {
+        opts.domains = ['itthere.co.kr', 'www.itthere.co.kr'];
+      } else {
+        opts.email = '77sy777@gmail.com';
+        opts.agreeTos = true;
+      }
+      cb(null, { options: opts, certs });
+    },
+    renewWithin: 81 * 24 * 60 * 60 * 1000,
+    renewBy: 80 * 24 * 60 * 60 * 1000,
+  });
+  https.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL_PORT || 443);
+var server = http.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
+  var io = socket(server);
 
-
-app.use(session({
+  app.use(session({
     secret: 'defjewvsplasd;',
     resave: true,
     saveUninitialized: true
@@ -278,7 +294,4 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error');
-});
-server.listen(3000, function () {
-    console.log('Server On !');
 });
