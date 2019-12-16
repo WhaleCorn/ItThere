@@ -8,7 +8,7 @@ router.get('/user', function (request, response) {
     response.render('login', { success: "로그인 페이지" });
     }
     else{
-        response.send('<script type="text/javascript">alert("잘못된 접근입니다."); window.location="/";</script>')
+        response.send('<script type="text/javascript">alert("잘못된 접근입니다."); history.go(-1);</script>')
     }
 
 });
@@ -18,7 +18,7 @@ router.get('/manager', function (request, response) {
         response.render('login', { success: "로그인 페이지" });
         }
         else{
-            response.send('<script type="text/javascript">alert("잘못된 접근입니다.")window.location="/";</script>')
+            response.send('<script type="text/javascript">alert("잘못된 접근입니다.");history.go(-1);</script>')
         }
     
     });
