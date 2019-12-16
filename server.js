@@ -18,7 +18,7 @@ var options ={
 var server =http.createServer(app).listen(80, function(){
     console.log('Server on!');
 });
-https.createServer(option, app).listen(443, function(){
+https.createServer(options, app).listen(443, function(){
 
 });
 var io = socket(server);
