@@ -8,25 +8,20 @@ var cookieParser = require('cookie-parser');
 var connection = require('./config/dbConnection');
 var app = express();  //웹 서버 생성
 
-const lex = require('greenlock-express').create({
-    version: 'draft-11', // 버전2
-    configDir: '/etc/letsencrypt', // 또는 ~/letsencrypt/etc
-    server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
-    approveDomains: (opts, certs, cb) => {
-      if (certs) {
-        opts.domains = ['itthere.co.kr', 'www.itthere.co.kr'];
-      } else {
-        opts.email = '77sy777@gmail.com';
-        opts.agreeTos = true;
-      }
-      cb(null, { options: opts, certs });
-    },
-    renewWithin: 81 * 24 * 60 * 60 * 1000,
-    renewBy: 80 * 24 * 60 * 60 * 1000,
-  });
-  https.createServer(lex.httpsOptions, lex.middleware(app)).listen(process.env.SSL_PORT || 443);
-var server = http.createServer(lex.middleware(require('redirect-https')())).listen(process.env.PORT || 80);
-  var io = socket(server);
+var fs =require('fs');
+var https = require('https');
+var options ={
+    key: fs.readFileSync('/etc/letsencrypt/live/www.itthere.co.kr/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/www.itthere.co.kr/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/www.itthere.co.kr/chain.pem')
+};
+var server =http.createServer(app).listen(80, function(){
+    console.log('Server on!');
+});
+https.createServer(option, app).listen(443, function(){
+
+});
+var io = socket(server);
 
   app.use(session({
     secret: 'defjewvsplasd;',
